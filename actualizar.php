@@ -1,6 +1,8 @@
 <?php 
 include("conexion.php");
-$consulta= "SELECT id_usuario,nombre,apellido,rol,mail,alias,pasword FROM usuarios";
+$id = $_GET["id"];
+
+$consulta= "SELECT id_usuario,nombre,apellido,rol,mail,pasword,alias FROM usuarios WHERE id_usuario=$id";
 ?>
 <!DOCTYPE html>
 <html>
@@ -14,7 +16,6 @@ $consulta= "SELECT id_usuario,nombre,apellido,rol,mail,alias,pasword FROM usuari
     <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
 </head>
 
-
 <body id="page-top">
     <div id="wrapper">
         <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
@@ -25,8 +26,8 @@ $consulta= "SELECT id_usuario,nombre,apellido,rol,mail,alias,pasword FROM usuari
                 </a>
                 <hr class="sidebar-divider my-0">
                 <ul class="nav navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item" role="presentation"><a class="nav-link active" href="index.html"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="Lista_Usuarios.html"><i class="fas fa-user"></i><span>Usuarios</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link active" href="index.php"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="Lista_Usuarios.php"><i class="fas fa-user"></i><span>Usuarios</span></a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="Proyectos.html"><i class="fas fa-table"></i><span>Proyectos</span></a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="Taller.html"><i class="fas fa-warehouse"></i><span>Recursos</span></a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href=""><i class="fas fa-user-circle"></i><span>Cerrar Sesión</span></a></li>
@@ -141,122 +142,58 @@ $consulta= "SELECT id_usuario,nombre,apellido,rol,mail,alias,pasword FROM usuari
             </div>
             </nav>
             <div class="container-fluid">
-                <h3 class="text-dark mb-4">Usuarios</h3>
-                <div class="row">
-                    <div class="col-md-6 col-xl-3 mb-4">
-                        <div class="card shadow border-left-primary py-2">
-                            <div class="card-body">
-                                <div class="row align-items-center no-gutters">
-                                    <div class="col mr-2">
-                                        <div class="text-uppercase text-primary font-weight-bold text-xs mb-1"><span>Nuevo Usuario</span></div>
-                                        <div class="text-dark font-weight-bold h5 mb-0"><span></span></div>
-                                    </div>
-                                    <div class="col-auto"><a class="btn btn-primary" href="crear_usuario.php"><i class="fas fa-user-plus  text-gray-300"></i></a></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6 col-xl-3 mb-4">
-                        <div class="card shadow border-left-warning py-2">
-                            <div class="card-body">
-                                <div class="row align-items-center no-gutters">
-                                    <div class="col mr-2">
-                                        <div class="text-uppercase text-warning font-weight-bold text-xs mb-1"><span>Usuarios</span></div>
-                                        
-                                    </div>
-                                    <div class="col-auto" style="color: darkgoldenrod;margin-right: 1rem; font-size: larger;">6</div>
-                                    <div class="col-auto"><i class="fas fa-tasks fa-2x text-gray-300"></i></div>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                </div>
+                <h3 class="text-dark mb-4">Editar Usuario</h3>
+                
                 <div
                     class="card shadow">
                     <div class="card-header py-3">
                         <p class="text-primary m-0 font-weight-bold">Información&nbsp;</p>
                     </div>
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-6 text-nowrap">
-                                <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable"><label>Mostrar&nbsp;<select class="form-control form-control-sm custom-select custom-select-sm"><option value="10" selected="">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select>&nbsp;</label></div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="text-md-right dataTables_filter" id="dataTable_filter"><label><input type="search" class="form-control form-control-sm" aria-controls="dataTable" placeholder="Buscar"></label></div>
-                            </div>
-                        </div>
+                        
                         <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
                             <table class="table dataTable my-0" id="dataTable">
-                                <thead class="thead-dark">
+                                <thead>
                                     <tr>
+                                        <th>#</th>
                                         <th>Nombre</th>
                                         <th>Apellido</th>
+                                        <th>Alias</th> 
+                                         <th>pasword</th>
                                         <th>Rol</th>
+                                        <th>Email</th>
                                         
-                                        <th>Alias</th>  
-                                        <th>Pasword</th>
-                                        <th>Email</th>                                     
-                                        <th>Editar</th>
-                                        <th>Eliminar</th>
+                                                                               
+                                        <th>Accion</th> 
+                                        
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    
+                                    <form action="procesar_actualizar.php" method="POST">
                                         <?php $resultado=mysqli_query($conexion, $consulta); 
                                         while($row=mysqli_fetch_assoc($resultado)){
                                         ?>
-                                           <tr> 
-                                            <td><?php echo $row["nombre"] ?></td>
-                                            <td><?php echo $row["apellido"] ?></td>
-                                            <td><?php echo $row["rol"] ?></td>
-                                            <td><?php echo $row["alias"] ?></td>
-                                            <td><?php echo $row["pasword"] ?></td>
-                                            <td><?php echo $row["mail"] ?></td>
-                                            <td><a class="btn btn-info mx-auto btn-circle ml-1" role="button" href="actualizar.php?id=<?php echo $row["id_usuario"]; ?>"><i class="fas fa-user-circle text-white"></i></a></td>
-                                            <td><a class="btn btn-danger " role="button" href="eliminar.php?id=<?php echo $row["id_usuario"]; ?>"><i class="fas fa-trash text-white"></i></a></td>
-
-                                            <script src="confirmacion.js"> </script>
-                                            
-
+                                           
+                                           <tr>
+                                           <td><input name="id_input" type="hidden"  value="<?php echo $row["id_usuario"] ?>"></td>
+                                            <td><input name="nombre_input" type="text"  value="<?php echo $row["nombre"] ?>"></td>
+                                            <td><input name="apellido_input" type="text"  value="<?php echo $row["apellido"] ?>"></td>
+                                            <td><input name="alias_input" type="text"  value="<?php echo $row["alias"] ?>"></td>
+                                            <td><input name="pasword_input" type="text"  value="<?php echo $row["pasword"] ?>"></td>
+                                            <td><input name="rol_input" type="text"  value="<?php echo $row["rol"] ?>"></td>
+                                            <td><input name="mail_input" type="text"  value="<?php echo $row["mail"] ?>"></td>
+                                            <td><input type="submit" value="Actualizar"></td>
+                                               
                                            </tr>
+                                           
                                             <?php } mysqli_free_result($resultado) ?>
                                    
-                                    
+                                     </form>
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                    <th>Nombre</th>
-                                        <th>Apellido</th>
-                                        <th>Rol</th>
-                                        
-                                        <th>Alias</th>  
-                                        <th>Pasword</th>
-                                        <th>Email</th>                                     
-                                        <th>Editar</th>
-                                        <th>Eliminar</th>
-                                    </tr>
-                                </tfoot>
+                                
                             </table>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6 align-self-center">
-                                <p id="dataTable_info" class="dataTables_info" role="status" aria-live="polite">Mostrando 1 al 10 de 27</p>
-                            </div>
-                            <div class="col-md-6">
-                                <nav class="d-lg-flex justify-content-lg-end dataTables_paginate paging_simple_numbers">
-                                    <ul class="pagination">
-                                        <li class="page-item disabled"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
-                                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
-                                    </ul>
-                                </nav>
-                            </div>
-                        </div>
+                        
                     </div>
             </div>
         </div>
