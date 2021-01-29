@@ -1,5 +1,14 @@
 <?php 
-include("conexion.php")
+include("conexion.php");
+session_start();
+//error_reporting(0); activr cuando termines de depurar todo
+$varsesion = $_SESSION['usuario'];
+
+
+if($varsesion==null || $varsesion=''){
+    echo"<script> alert('No tiene permiso para ingresar'); window.location='/gestion/index.php' </script>";
+    die();
+}
 ?>
 
 <!DOCTYPE html>
@@ -145,9 +154,12 @@ include("conexion.php")
                 <div class="row mb-3">
                     <div class="col-lg-4">
                         <div class="card mb-3">
+                       
                             <div class="card-body text-center shadow"><img class="rounded-circle mb-3 mt-4" src="assets/img/dogs/image2.jpeg" width="160" height="160">
-                                
+                            
+
                             </div>
+                      
                         </div>
                     </div>
                     <div class="col-lg-8">
@@ -188,7 +200,7 @@ include("conexion.php")
                                         <p class="text-primary m-0 font-weight-bold">Configurar Usuario</p>
                                     </div>
                                     <div class="card-body">
-                                        <form action="insertar.php" method="POST">
+                                    <form action="insertar.php" method="POST" enctype="multipart/form-data">
                                             <div class="form-row">
                                                 <div class="col">
                                                     <div class="form-group"><label for="nombre"><strong>Nombre&nbsp;</strong></label><input class="form-control" type="text" placeholder="Nombre " name="nombre" required="Ingrese dato valido"></div>
@@ -213,10 +225,10 @@ include("conexion.php")
                                                     <div class="form-group"><label for="mail"><strong>Email</strong><br></label><input class="form-control" type="email"required="Ingrese dato valido" placeholder="usuario@cab.cnea.gov.ar" name="mail"></div>
                                                 </div>
                                             </div>
-                                            <div class="form-row">
-                                                
-                                                <div class="col">
-                                                <input type="submit" class="btn btn-primary btn-sm" value="Register"/> 
+                                            <div class="form-row" style="margin-left:auto; right:0px; max-width:fit-content">
+                                            <input type="file" class="btn btn-primary btn-sm" name="imagen" value="agregar imagen"/> 
+                                                <div class="col" style="max-width:fit-content">
+                                                <input type="submit" class="btn btn-primary btn-sm" value="Guardar"/> 
                                                 </div>
                                             </div>
                                         </form>

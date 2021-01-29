@@ -1,3 +1,28 @@
+
+<?php 
+include("conexion.php");
+session_start();
+//error_reporting(0); activr cuando termines de depurar todo
+$varsesion = $_SESSION['usuario'];
+
+
+if($varsesion==null || $varsesion=''){
+    echo"<script> alert('No tiene permiso para ingresar'); window.location='/gestion/index.php' </script>";
+    die();
+}
+
+$consulta_rol="SELECT rol FROM usuarios WHERE alias='$_SESSION[usuario]'";
+$rol_array=mysqli_query($conexion,$consulta_rol);
+$rol = $rol_array->fetch_array(MYSQLI_ASSOC);//convierte el tipo de dato mysqli a array
+//printf ("%s \n", $rol["rol"]);
+$consulta_imagen="SELECT imagen FROM usuarios WHERE alias='$_SESSION[usuario]'";
+$query_imagen=mysqli_query($conexion,$consulta_imagen);
+$imagen=$query_imagen->fetch_array(MYSQLI_ASSOC);
+
+
+?>
+
+
 <!DOCTYPE html>
 <html>
 
@@ -20,11 +45,38 @@
                 </a>
                 <hr class="sidebar-divider my-0">
                 <ul class="nav navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item" role="presentation"><a class="nav-link active" href="Administrador.html"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="Lista_Usuarios.html"><i class="fas fa-user"></i><span>Usuarios</span></a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="Proyectos.html"><i class="fas fa-table"></i><span>Proyectos</span></a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="Lista_Recursos.html"><i class="fas fa-warehouse"></i><span>Recursos</span></a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href=""><i class="fas fa-user-circle"></i><span>Cerrar Sesión</span></a></li>
+                <!-- arranca admin -->  
+            <?php if ( 'admin' == $rol["rol"] ) {?>
+                    <li class="nav-item" role="presentation"><a class="nav-link active" href="panel.php"><i class="fas fa-tachometer-alt"></i><span>Panel Principal</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="Lista_Usuarios.php"><i class="fas fa-user"></i><span>Usuarios</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="Proyectos.php"><i class="fas fa-table"></i><span>Proyectos</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="Lista_Recursos.php"><i class="fas fa-warehouse"></i><span>Recursos</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="cerrar_sesion.php"><i class="fas fa-user-circle"></i><span>Cerrar Sesión</span></a></li>
+                <?php }?> <!-- termina admin -->
+                 <!-- arranca jefe -->  
+            <?php if ( 'jefe' == $rol["rol"] ) {?>
+                    <li class="nav-item" role="presentation"><a class="nav-link active" href="panel.php"><i class="fas fa-tachometer-alt"></i><span>Panel Principal</span></a></li>                    
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="Proyectos.php"><i class="fas fa-table"></i><span>Proyectos</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="Lista_Recursos.php"><i class="fas fa-warehouse"></i><span>Recursos</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="cerrar_sesion.php"><i class="fas fa-user-circle"></i><span>Cerrar Sesión</span></a></li>
+                <?php }?> <!-- termina jefe -->
+
+            <!-- arranca taller -->
+            <?php if ( 'taller' == $rol["rol"] ) {?>
+                    <li class="nav-item" role="presentation"><a class="nav-link active" href="panel.php"><i class="fas fa-tachometer-alt"></i><span>Panel Principal</span></a></li>                    
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="Proyectos.php"><i class="fas fa-table"></i><span>Proyectos</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="Lista_Recursos.php"><i class="fas fa-warehouse"></i><span>Recursos</span></a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="cerrar_sesion.php"><i class="fas fa-user-circle"></i><span>Cerrar Sesión</span></a></li>
+                <?php }?> <!-- termina taller -->
+
+               <!-- arranca agente -->
+                <?php if ( 'agente' == $rol["rol"] ) {?>
+                    <li class="nav-item" role="presentation"><a class="nav-link active" href="panel.php"><i class="fas fa-tachometer-alt"></i><span>Panel Principal</span></a></li>                    
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="Proyectos.php"><i class="fas fa-table"></i><span>Proyectos</span></a></li>                    
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="cerrar_sesion.php"><i class="fas fa-user-circle"></i><span>Cerrar Sesión</span></a></li>
+                <?php }?> 
+                <!-- termina agente -->
+                    
                 </ul>
                 <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
             </div>
@@ -124,17 +176,21 @@
                             </li>
                             <div class="d-none d-sm-block topbar-divider"></div>
                             <li class="nav-item dropdown no-arrow" role="presentation">
-                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"><span class="d-none d-lg-inline mr-2 text-gray-600 small">Carla Perez</span><img class="border rounded-circle img-profile" src="assets/img/avatars/avatar1.jpeg"></a>
+                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#"><span class="d-none d-lg-inline mr-2 text-gray-600 small"><?php echo $_SESSION['usuario'] ?></span><img class="border rounded-circle img-profile" src="<?php echo $imagen['imagen']?>"></a>
                                     <div
-                                        class="dropdown-menu shadow dropdown-menu-right animated--grow-in" role="menu"><a class="dropdown-item" role="presentation" href="#"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Profile</a><a class="dropdown-item" role="presentation" href="#"><i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Settings</a>
+                                        class="dropdown-menu shadow dropdown-menu-right animated--grow-in" role="menu"><a class="dropdown-item" role="presentation" href="#"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Editar perfil</a><a class="dropdown-item" role="presentation" href="#"><i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Settings</a>
                                         <a
-                                            class="dropdown-item" role="presentation" href="#"><i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Activity log</a>
-                                            <div class="dropdown-divider"></div><a class="dropdown-item" role="presentation" href="#"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Logout</a></div>
+                                            class="dropdown-item" role="presentation" href="#"><i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Registro de actividades</a>
+                                            <div class="dropdown-divider"></div><a class="dropdown-item" role="presentation" href="cerrar_sesion.php"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Cerrar Sesion</a></div>
                     </div>
                     </li>
                     </ul>
             </div>
             </nav>
+             
+             <!-- arranca Admin -->  
+            <?php if ( 'admin' == $rol["rol"] ) {?>      
+                    
             <div class="container-fluid">
                 <div class="d-sm-flex justify-content-between align-items-center mb-4">
                     <h3 class="text-dark mb-0">Dashboard</h3><a class="btn btn-primary btn-sm d-none d-sm-inline-block" role="button" href="#"><i class="fas fa-download fa-sm text-white-50"></i>&nbsp;Generar Reporte</a></div>
@@ -225,6 +281,25 @@
                     
                 </div>
             </div>
+            
+            
+            <?php }?>      <!-- termina Admin --> 
+
+            <!-- arranca jefe -->  
+            <?php if ( 'jefe' == $rol["rol"] ) {?>
+            entraste a jefe de departamento
+                <?php }?> <!-- termina jefe -->
+
+            <!-- arranca taller -->
+            <?php if ( 'taller' == $rol["rol"] ) {?>
+            entraste a taller
+                <?php }?> <!-- termina taller -->
+
+               <!-- arranca agente -->
+                <?php if ( 'agente' == $rol["rol"] ) {?>
+            entraste a agente
+                <?php }?> 
+                <!-- termina agente -->
         </div>
     </div>
     <footer class="bg-white sticky-footer">

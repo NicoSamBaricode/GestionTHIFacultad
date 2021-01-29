@@ -6,7 +6,7 @@
      
      exit;
  }
- else echo "conexion correcta a gestion thi bd";
+
  
 
  
