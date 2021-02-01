@@ -10,31 +10,37 @@ if($varsesion==null || $varsesion=''){
     die();
 }
 $nombre=$_POST["nombre"];
-$apellido=$_POST["apellido"];
-$contr=$_POST["pasword"];
-$alias=$_POST["alias"];
-$mail=$_POST["mail"];
-$rol=$_POST["rol"];
+$identificador=$_POST["identificador"];
+$fecha=$_POST["fecha"];
+$tema=$_POST["tema"];
+$descrip=$_POST["descrip"];
+$sector=$_POST["sector"];
+$resp=$_POST["resp"];
+$fecha_realizado=$_POST["frealizado"];
+$obs=$_POST["obs"];
+$estado=$_POST["estado"];
+
 
 //aca para subir archivos
-if($_FILES["imagen"]){
-$nombre_base=basename($_FILES["imagen"]["name"]);//extrae el nombre del archivo
+/*if($_FILES["archivo"]){
+$nombre_base=basename($_FILES["archivo"]["name"]);//extrae el nombre del archivo
 $nombre_final=date("d-m-a"). "-" .date("H-i-s")."-".$nombre_base;
- $ruta="assets/img/avatars".$nombre_final;
- $subirarchivo= move_uploaded_file($_FILES["imagen"]["tmp_name"], $ruta);
-    if($subirarchivo){
+ $ruta_p="assets/doc_proyectos".$nombre_final;
+ $subirarchivo_p= move_uploaded_file($_FILES["archivo"]["tmp_name"], $ruta_p);
+    if($subirarchivo_p){
        
-       $insertar = "INSERT INTO usuarios(nombre,apellido,mail,alias,rol,pasword,imagen) VALUES ('$nombre','$apellido','$mail','$alias','$rol','$contr','$ruta')";
-       $query= mysqli_query($conexion, $insertar);
+       $insertar_p = "INSERT INTO proyectos(identificador,nombre,fecha,tema,descrip,sector,resp,frealizado,obs,estado,archivo) VALUES ('$identificador','$nombre','$fecha','$tema','$descrip','$sector','$resp','$fecha_realizado','$obs','$estado','$ruta_p')";
+       $query_p= mysqli_query($conexion, $insertar_p);
     }
 }
 //fin subir archivos
+*/
 
+$insertar_p = "INSERT INTO proyectos(identificador,nombre,fecha_inicio,tema,descripcion,sector,responsable,fecha_realizado,observaciones,estado) VALUES ('$identificador','$nombre','$fecha','$tema','$descrip','$sector','$resp','$fecha_realizado','$obs','$estado')";
+$query_p= mysqli_query($conexion, $insertar_p);
 
-
-
-if($query){
-    echo"<script> alert('Se insertaron los datos con exito'); window.location='/gestion/Lista_Usuarios.php'</script> ";
+if($query_p){
+    echo"<script> alert('Se insertaron los datos con exito'); window.location='/gestion/proyectos.php'</script> ";
 }
 else {
     echo"<script> alert('Fallo al insertar datos'); </script>";

@@ -69,62 +69,75 @@ $imagen=$query_imagen->fetch_array(MYSQLI_ASSOC);
             </div>
             </nav>
             <div class="container-fluid">
-                <h3 class="text-dark mb-4">Nuevo Usuario</h3>
+                <h3 class="text-dark mb-4">Nuevo Proyecto</h3>
                 <div class="row mb-3">
-                    <div class="col-lg-4">
-                        <div class="card mb-3">
-                       
-                            <div class="card-body text-center shadow"><img class="rounded-circle mb-3 mt-4" src="assets/img/dogs/image2.jpeg" width="160" height="160">
-                            
-
-                            </div>
-                      
-                        </div>
-                    </div>
-                    <div class="col-lg-8">
+                    
+                    <div class="col-lg-12">
                         
                         <div class="row">
                             <div class="col">
                                 <div class="card shadow mb-3">
                                     <div class="card-header py-3">
-                                        <p class="text-primary m-0 font-weight-bold">Configurar Usuario</p>
+                                        <p class="text-primary m-0 font-weight-bold">Configurar Proyecto</p>
                                     </div>
                                     <div class="card-body">
-                                    <form action="insertar.php" method="POST" enctype="multipart/form-data">
+                                    <form action="insertar_proyecto.php" method="POST" enctype="multipart/form-data">
                                             <div class="form-row">
                                                 <div class="col">
                                                     <div class="form-group"><label for="nombre"><strong>Nombre&nbsp;</strong></label><input class="form-control" type="text" placeholder="Nombre " name="nombre" required="Ingrese dato valido"></div>
                                                 </div>
                                                 <div class="col">
-                                                    <div class="form-group"><label for="apellido"><strong>Apellido</strong></label><input class="form-control" type="text" placeholder="Apellido" required="Ingrese dato valido"name="apellido"></div>
+                                                    <div class="form-group"><label for="fecha"><strong>Fecha de Inicio</strong></label><input class="form-control" type="date" placeholder="Fecha inicio" required="Ingrese dato valido"name="fecha"></div>
                                                 </div>
                                             </div>
                                             <div class="form-row">
                                                 <div class="col">
-                                                <div class="form-group"><label for="alias"><strong>Tipo de Usuario</strong><br></label><input class="form-control" type="text"required="Ingrese dato valido" placeholder="Tipo de usuario" name="rol"></div>
+                                                    <div class="form-group"><label for="identificador"><strong>Identificador&nbsp;</strong></label><input class="form-control" type="text" placeholder="Identificador" name="identificador" required="Ingrese dato valido"></div>
                                                 </div>
                                                 <div class="col">
-                                                    <div class="form-group"><label for="pasword"><strong>Contraseña</strong></label><input class="form-control" type="pasword"required="Ingrese dato valido" placeholder="contraseña" name="pasword"></div>
-                                                </div>
-                                            </div>
-                                            <div class="form-row">
-                                                <div class="col">
-                                                    <div class="form-group"><label for="alias"><strong>Nombre de Usuario</strong><br></label><input class="form-control" type="text"required="Ingrese dato valido" placeholder="Nombre de usuario" name="alias"></div>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="form-group"><label for="mail"><strong>Email</strong><br></label><input class="form-control" type="email"required="Ingrese dato valido" placeholder="usuario@cab.cnea.gov.ar" name="mail"></div>
+                                                    <div class="form-group"><label for="tema"><strong>Tema</strong></label><input class="form-control" type="text" placeholder="Tema" name="tema"></div>
                                                 </div>
                                             </div>
                                             <div class="form-row">
                                                 <div class="col">
-                                                    <div class="form-group"><label for="imagen"><strong>Imagen de Perfil</strong><br></label><br><input type="file" required class="btn btn-secondary btn-sm" name="imagen" value="agregar imagen"/></div>
+                                                <div class="form-group"><label for="descripcion"><strong>Descripcion</strong><br></label><textarea class="form-control" type="text" placeholder="Descripcion" name="descrip"></textarea></div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="form-group"><label for="sector"><strong>Sector</strong></label><input class="form-control" type="text"required="Ingrese dato valido" placeholder="Sector" name="sector"></div>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="col">
+                                                    <div class="form-group"><label for="resp"><strong>Responsable</strong><br></label><input class="form-control" type="text"required="Ingrese dato valido" placeholder="Responsable" name="resp"></div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="form-group"><label for="frealizacion"><strong>Fecha finalizacion</strong><br></label><input class="form-control" type="date" placeholder="Ingrese fecha de finalizacion" name="frealizado"></div>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="col">
+                                                    <div class="form-group"><label for="obs"><strong>Observaciones</strong><br></label><textarea class="form-control" type="text" placeholder="Observaciones" name="obs"></textarea></div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="form-group"><label for="estado"><strong>Estado</strong><br></label><select class="form-control" require name="estado" id="exampleFormControlSelect1"> <option>Pendiente</option>
+                                                                                                                                                                                                               <option>En proceso</option>
+                                                                                                                                                                                                               <option>Realizado</option>
+                                                                                                                                                                                                               <option>Cancelado</option>
+                                                                                                                                                                                                               <option>Revisar</option></select>
+                                                                                                                                                                                                </div>
+                                                </div>
+                                            </div>
+                                            <!--  
+                                            <div class="form-row">
+                                                <div class="col">
+                                                    <div class="form-group"><label for="archivo"><strong>Subir archivo</strong><br></label><br><input type="file"  class="btn btn-secondary btn-sm" name="archivo" value="agregar archivo"/></div>
                                                 </div>
                                                 
-                                            </div>
+                                            </div>-->
                                             <div class="form-row" style="margin-left:auto; right:0px; max-width:fit-content">
                                              
                                                 <div class="col" style="max-width:fit-content">
-                                                <input type="submit" class="btn btn-primary btn-sm" value="Crear Usuario"/> 
+                                                <input type="submit" class="btn btn-primary btn-sm" value="Crear Proyecto"/> 
                                                 </div>
                                             </div>
                                         </form>

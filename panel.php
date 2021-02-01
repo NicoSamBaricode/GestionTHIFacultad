@@ -19,6 +19,8 @@ $consulta_imagen="SELECT imagen FROM usuarios WHERE alias='$_SESSION[usuario]'";
 $query_imagen=mysqli_query($conexion,$consulta_imagen);
 $imagen=$query_imagen->fetch_array(MYSQLI_ASSOC);
 
+$consulta_proyecto= "SELECT identificador,nombre,fecha_inicio,tema,sector,responsable,fecha_realizado,estado FROM proyectos";
+$contador_p = "SELECT COUNT(*) total FROM proyectos";
 
 ?>
 
@@ -223,7 +225,11 @@ $imagen=$query_imagen->fetch_array(MYSQLI_ASSOC);
                                 <div class="row align-items-center no-gutters">
                                     <div class="col mr-2">
                                         <div class="text-uppercase text-warning font-weight-bold text-xs mb-1"><span>Proyectos</span></div>
-                                        <div class="text-dark font-weight-bold h5 mb-0"><span>5</span></div>
+                                        <div class="text-dark font-weight-bold h5 mb-0"><span><?php 
+                                    $result_cont = mysqli_query($conexion, $contador_p);
+                                    $fila = mysqli_fetch_assoc($result_cont);
+                                    echo "" . $fila['total'];
+                                    ?></span></div>
                                     </div>
                                     <div class="col-auto"><i class="fas fa-comments fa-2x text-gray-300"></i></div>
                                 </div>

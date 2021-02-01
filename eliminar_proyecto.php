@@ -2,18 +2,18 @@
 include("conexion.php");
 
 
-$id=$_GET["id"];
+$id_p=$_GET["idp"];
 
 
 
-$eliminar= "DELETE FROM usuarios WHERE id_usuario='$id'";
+$eliminar= "DELETE FROM proyectos WHERE id_proyectos='$id_p'";
 
-$resul= mysqli_query($conexion, $eliminar);
+$resul_p= mysqli_query($conexion, $eliminar);
 
 
 
-if($resul){
-    echo"<script> alert('Se eliminaron los datos con exito'); window.location='/gestion/Lista_Usuarios.php'</script> ";
+if($resul_p){
+    echo"<script> alert('Se eliminaron los datos con exito'); window.location='/gestion/proyectos.php'</script> ";
    
 }
 else {

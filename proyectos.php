@@ -10,7 +10,7 @@ if($varsesion==null || $varsesion=''){
     die();
 }
 
-$consulta_proyecto= "SELECT id_proyectos,nombre,fecha_inicio,tema,sector,responsable,fecha_realizado,estado FROM proyectos";
+$consulta_proyecto= "SELECT id_proyectos,identificador,nombre,fecha_inicio,tema,sector,responsable,fecha_realizado,estado FROM proyectos";
 $contador = "SELECT COUNT(*) total FROM proyectos";
 
 $consulta_imagen="SELECT imagen FROM usuarios WHERE alias='$_SESSION[usuario]'";
@@ -71,7 +71,7 @@ $imagen=$query_imagen->fetch_array(MYSQLI_ASSOC);
             </div>
             </nav>
             <div class="container-fluid">
-                <h3 class="text-dark mb-4">Usuarios</h3>
+                <h3 class="text-dark mb-4">Proyectos</h3>
                 <div class="row">
                     <div class="col-md-6 col-xl-3 mb-4">
                         <div class="card shadow border-left-primary py-2">
@@ -150,7 +150,7 @@ $imagen=$query_imagen->fetch_array(MYSQLI_ASSOC);
                                         ?>
                                            <tr> 
                                             <script src="cartel.js"> </script>
-                                            <td><?php echo $row["id_proyectos"] ?></td>
+                                            <td><?php echo $row["identificador"] ?></td>
                                             <td><?php echo $row["nombre"] ?></td>
                                             <td><?php echo $row["fecha_inicio"] ?></td>
                                             <td><?php echo $row["tema"] ?></td>
@@ -158,14 +158,15 @@ $imagen=$query_imagen->fetch_array(MYSQLI_ASSOC);
                                             <td><?php echo $row["responsable"] ?></td>
                                             <td><?php echo $row["fecha_realizado"] ?></td>
                                             <td><?php echo $row["estado"] ?></td>
-                                            <td><a class="btn btn-secondary mx-auto btn-circle ml-1" onclick="return confirmBorrar()" role="button" href="detalle_proyecto.php?id=<?php echo $row["id_usuario"]; ?>"><i class="fas fa-file-alt text-white"></i></a></td>
+                                            <td><a class="btn btn-secondary mx-auto btn-circle ml-1"  role="button" href="detalle_proyecto.php?id=<?php echo $row["id_proyectos"]; ?>"><i class="fas fa-file-alt text-white"></i></a></td>
 
-                                            <td><a class="btn btn-success mx-auto btn-circle ml-1" role="button" href="finalizar.php?id=<?php echo $row["id_usuario"]; ?>"><i class="fas fa-clipboard-check"></i></a></td>
+                                            <td><a class="btn btn-success mx-auto btn-circle ml-1" role="button" href="finalizar.php?id=<?php echo $row["id_proyectos"]; ?>"><i class="fas fa-clipboard-check"></i></a></td>
 
-                                            <td><a class="btn btn-info mx-auto btn-circle ml-1" role="button" href="actualizar.php?id=<?php echo $row["id_usuario"]; ?>"><i class="fas fa-user-circle text-white"></i></a></td>
-                                            <td><a class="btn btn-danger mx-auto btn-circle ml-1" onclick="return confirmBorrar()" role="button" href="eliminar.php?id=<?php echo $row["id_usuario"]; ?>"><i class="fas fa-trash text-white"></i></a></td>
+                                            <td><a class="btn btn-info mx-auto btn-circle ml-1" role="button" href="actualizar.php?id=<?php echo $row["id_proyectos"]; ?>"><i class="fas fa-user-circle text-white"></i></a></td>
+                                            <td><a class="btn btn-danger mx-auto btn-circle ml-1" onclick="return confirmBorrar()" role="button" href="eliminar.php?id=<?php echo $row["id_proyectos"]; ?>"><i class="fas fa-trash text-white"></i></a></td>
 
                                            </tr>
+
                                             <?php } mysqli_free_result($resultado) ?>
                                    
                                     
