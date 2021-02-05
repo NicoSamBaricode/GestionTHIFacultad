@@ -99,14 +99,20 @@ $imagen=$query_imagen->fetch_array(MYSQLI_ASSOC);
                                                     <div class="form-group"><label for="apellido"><strong>Apellido</strong></label><input class="form-control" type="text" placeholder="Apellido" required="Ingrese dato valido"name="apellido"></div>
                                                 </div>
                                             </div>
+                                            
                                             <div class="form-row">
-                                                <div class="col">
-                                                <div class="form-group"><label for="alias"><strong>Tipo de Usuario</strong><br></label><input class="form-control" type="text"required="Ingrese dato valido" placeholder="Tipo de usuario" name="rol"></div>
+
+                                            <div class="col">
+                                                    <div class="form-group"><label for="rol"><strong>Tipo de Usuario</strong></label><select class="form-control" required name="rol" placeholder="Tipo de usuario" id="rol">   <option selected>Agente</option><option>Admin</option> <option>Taller</option> <option>Jefe</option></select></div>
                                                 </div>
                                                 <div class="col">
                                                     <div class="form-group"><label for="pasword"><strong>Contraseña</strong></label><input class="form-control" type="pasword"required="Ingrese dato valido" placeholder="contraseña" name="pasword"></div>
                                                 </div>
                                             </div>
+
+                                            
+                                                
+                                            
                                             <div class="form-row">
                                                 <div class="col">
                                                     <div class="form-group"><label for="alias"><strong>Nombre de Usuario</strong><br></label><input class="form-control" type="text"required="Ingrese dato valido" placeholder="Nombre de usuario" name="alias"></div>

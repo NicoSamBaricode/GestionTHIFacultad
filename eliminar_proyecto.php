@@ -1,8 +1,10 @@
 <?php 
 include("conexion.php");
+session_start();
+//error_reporting(0); activr cuando termines de depurar todo
+$varsesion = $_SESSION['usuario'];
 
-
-$id_p=$_GET["idp"];
+$id_p=$_GET["id"];
 
 
 

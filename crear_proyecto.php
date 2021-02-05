@@ -137,7 +137,7 @@ $imagen=$query_imagen->fetch_array(MYSQLI_ASSOC);
                                             <div class="form-row" style="margin-left:auto; right:0px; max-width:fit-content">
                                              
                                                 <div class="col" style="max-width:fit-content">
-                                                <input type="submit" class="btn btn-primary btn-sm" value="Crear Proyecto"/> 
+                                                <input type="submit" class="btn btn-primary btn-sm " value="Crear Proyecto"/> 
                                                 </div>
                                             </div>
                                         </form>

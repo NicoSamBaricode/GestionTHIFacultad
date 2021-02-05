@@ -10,7 +10,7 @@ if($varsesion==null || $varsesion=''){
     die();
 }
 
-$consulta_proyecto= "SELECT identificador,nombre,fecha_inicio,tema,sector,responsable,fecha_realizado,estado FROM proyectos WHERE id_proyectos=$id_proyecto";
+$consulta_proyecto= "SELECT * FROM proyectos WHERE id_proyectos=$id_proyecto";
 $contador = "SELECT COUNT(*) total FROM proyectos";
 
 $consulta_imagen="SELECT imagen FROM usuarios WHERE alias='$_SESSION[usuario]'";
@@ -71,16 +71,11 @@ $imagen=$query_imagen->fetch_array(MYSQLI_ASSOC);
             </div>
             </nav>
             <div class="container-fluid">
-                <h3 class="text-dark mb-4">Proyectos</h3>
-               
-                
-                <div
-                    class="card shadow">
+                <h3 class="text-dark mb-4">Proyecto</h3>
+               <div class="row">
+                   <div class="col">
+                      <div   class="card shadow">
                     
-                   
-                        
-                        
-                                    
                                         <?php $resultado=mysqli_query($conexion, $consulta_proyecto); 
                                         while($row=mysqli_fetch_assoc($resultado)){
                                         ?>
@@ -92,21 +87,61 @@ $imagen=$query_imagen->fetch_array(MYSQLI_ASSOC);
 
                                            <div class="card-body">
                                             <script src="cartel.js"> </script>
-                                            <?php echo $row["identificador"] ?>
-                                           
-                                            <?php echo $row["fecha_inicio"] ?>
-                                            <?php echo $row["tema"] ?>
-                                            <?php echo $row["sector"] ?>
-                                            <?php echo $row["responsable"] ?>
-                                            <?php echo $row["fecha_realizado"] ?>
-                                            <?php echo $row["estado"] ?>
-                                            <a class="btn btn-secondary mx-auto btn-circle ml-1" onclick="return confirmBorrar()" role="button" href="detalle_proyecto.php?id=<?php echo $row["id_usuario"]; ?>"><i class="fas fa-file-alt text-white"></i></a>
-
-                                           <a class="btn btn-success mx-auto btn-circle ml-1" role="button" href="finalizar.php?id=<?php echo $row["id_usuario"]; ?>"><i class="fas fa-clipboard-check"></i></a>
-
-                                          <a class="btn btn-info mx-auto btn-circle ml-1" role="button" href="actualizar.php?id=<?php echo $row["id_usuario"]; ?>"><i class="fas fa-user-circle text-white"></i></a>
-                                            <a class="btn btn-danger mx-auto btn-circle ml-1" onclick="return confirmBorrar()" role="button" href="eliminar.php?id=<?php echo $row["id_usuario"]; ?>"><i class="fas fa-trash text-white"></i></a>
-
+                                            <form action="insertar_proyecto.php" method="POST" enctype="multipart/form-data">
+                                            <div class="form-row">
+                                                <div class="col">
+                                                <div class="form-group"><label for="identificador"><strong>Identificador&nbsp;</strong></label><p><?php echo $row["identificador"] ?></p></div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="form-group"><label for="fecha"><strong>Fecha de Inicio</strong></label><p><?php echo $row["fecha_inicio"] ?></p></div>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                
+                                                <div class="col">
+                                                    
+                                                    <div class="form-group"><label for="descripcion"><strong>Descripcion</strong><br></label><p><?php echo $row["descripcion"] ?></p></div>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="col">
+                                                <div class="form-group"><label for="tema"><strong>Tema</strong></label><p><?php echo $row["tema"] ?></p></div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="form-group"><label for="sector"><strong>Sector</strong></label><p><?php echo $row["sector"] ?></p></div>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="col">
+                                                    <div class="form-group"><label for="resp"><strong>Responsable</strong><br></label><p><?php echo $row["responsable"] ?></p></div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="form-group"><label for="frealizacion"><strong>Fecha finalizacion</strong><br></label><p><?php echo $row["fecha_realizado"] ?></p></div>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="col">
+                                                    <div class="form-group"><label for="obs"><strong>Observaciones</strong><br></label><p><?php echo $row["observaciones"] ?></p></div>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="form-group"><label for="estado"><strong>Estado</strong><br></label><p><?php echo $row["estado"] ?></p>
+                                                                                                                                                                                                </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-row" style="margin-left:auto; right:0px; max-width:fit-content">
+                                            <a class="btn btn-secondary mx-auto  ml-1"  role="button" href="proyectos.php">Volver</a>
+                                            
+                                                <div class="col" style="max-width:fit-content">
+                                                <a class="btn btn-info mx-auto  ml-1" role="button" href="actualizar_p.php?id=<?php echo $row["id_proyectos"]; ?>">Editar</a>
+                                                 
+                                                </div>
+                                                <div class="col" style="max-width:fit-content">
+                                                <a class="btn btn-danger mx-auto btn-circle ml-1" onclick="return confirmBorrar()" role="button" href="eliminar_proyecto.php?id=<?php echo $row["id_proyectos"]; ?>"><i class="fas fa-trash text-white"></i></a>
+                                                </div>
+                                            </div>
+                                        </form>
+                                            
                                            </div>
                                             <?php } mysqli_free_result($resultado) ?>
                                    
@@ -115,7 +150,12 @@ $imagen=$query_imagen->fetch_array(MYSQLI_ASSOC);
                         
                         
                     </div>
-            </div>
+                    </div>
+                   </div>
+               </div>
+                
+                
+        </div>
         </div>
     </div>
     <footer class="bg-white sticky-footer">

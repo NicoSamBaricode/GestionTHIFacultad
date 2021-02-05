@@ -138,7 +138,7 @@ $imagen=$query_imagen->fetch_array(MYSQLI_ASSOC);
                                         <th>Fecha de Fin</th> 
                                         <th>Estado</th> 
                                         <th>Detalles</th> 
-                                        <th>Finalizar</th>                                  
+                                                                       
                                         <th>Editar</th>
                                         <th>Eliminar</th>
                                     </tr>
@@ -160,10 +160,9 @@ $imagen=$query_imagen->fetch_array(MYSQLI_ASSOC);
                                             <td><?php echo $row["estado"] ?></td>
                                             <td><a class="btn btn-secondary mx-auto btn-circle ml-1"  role="button" href="detalle_proyecto.php?id=<?php echo $row["id_proyectos"]; ?>"><i class="fas fa-file-alt text-white"></i></a></td>
 
-                                            <td><a class="btn btn-success mx-auto btn-circle ml-1" role="button" href="finalizar.php?id=<?php echo $row["id_proyectos"]; ?>"><i class="fas fa-clipboard-check"></i></a></td>
 
-                                            <td><a class="btn btn-info mx-auto btn-circle ml-1" role="button" href="actualizar.php?id=<?php echo $row["id_proyectos"]; ?>"><i class="fas fa-user-circle text-white"></i></a></td>
-                                            <td><a class="btn btn-danger mx-auto btn-circle ml-1" onclick="return confirmBorrar()" role="button" href="eliminar.php?id=<?php echo $row["id_proyectos"]; ?>"><i class="fas fa-trash text-white"></i></a></td>
+                                            <td><a class="btn btn-info mx-auto btn-circle ml-1" role="button" href="actualizar_p.php?id=<?php echo $row["id_proyectos"]; ?>"><i class="fas fa-user-circle text-white"></i></a></td>
+                                            <td><a class="btn btn-danger mx-auto btn-circle ml-1" onclick="return confirmBorrar()" role="button" href="eliminar_proyecto.php?id=<?php echo $row["id_proyectos"]; ?>"><i class="fas fa-trash text-white"></i></a></td>
 
                                            </tr>
 
@@ -182,7 +181,7 @@ $imagen=$query_imagen->fetch_array(MYSQLI_ASSOC);
                                         <th>Fecha de Fin</th> 
                                         <th>Estado</th> 
                                         <th>Detalles</th> 
-                                        <th>Finalizar</th>                                  
+                                                                     
                                         <th>Editar</th>
                                         <th>Eliminar</th>
                                     </tr>

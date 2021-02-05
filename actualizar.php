@@ -1,5 +1,8 @@
 <?php 
 include("conexion.php");
+session_start();
+//error_reporting(0); activr cuando termines de depurar todo
+$varsesion = $_SESSION['usuario'];
 $id = $_GET["id"];
 
 $consulta= "SELECT id_usuario,nombre,apellido,rol,mail,pasword,alias FROM usuarios WHERE id_usuario=$id";
